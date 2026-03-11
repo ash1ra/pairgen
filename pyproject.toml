@@ -1,0 +1,7 @@
+[project]
+name = "pairgen"
+version = "1.0.0"
+description = "pairgen"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
