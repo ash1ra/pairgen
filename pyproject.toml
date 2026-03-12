@@ -1,7 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "pairgen"
 version = "1.0.0"
-description = "pairgen"
+requires-python = ">=3.11"
+authors = [{ name = "ash1ra" }]
+description = "Fast and reliable HR-LR image pair generator"
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = []
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+classifiers = [
+	"Development Status :: 5 - Production/Stable",
+	"License :: OSI Approved :: Apache Software License",
+	"Intended Audience :: Developers",
+	"Intended Audience :: Education",
+	"Programming Language :: Python",
+	"Programming Language :: Python :: 3.10",
+	"Programming Language :: Python :: 3.11",
+	"Programming Language :: Python :: 3.12",
+	"Programming Language :: Python :: 3.13",
+	"Programming Language :: Python :: 3.14",
+]
+
+dependencies = [
+    "numpy>=2.4.3",
+    "pillow>=12.1.1",
+    "tqdm>=4.67.3",
+]
+
+[dependency-groups]
+dev = [
+	"pytest>=9.0.2",
+	"ruff>=0.15.4",
+]
+
+[project.urls]
+Repository = "https://github.com/ash1ra/pairgen"
+Issues = "https://github.com/ash1ra/pairgen/issues"
+
+[project.scripts]
+pairgen = "pairgen.cli:main"
+
+[tool.ruff]
+line-length = 120
+
