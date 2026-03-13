@@ -16,7 +16,7 @@ def process_single_img(
     hr_dir: Path,
     lr_dir: Path,
     scaling_factor: int,
-    resampling_method: str,
+    interpolation: str,
     patch_size: int,
     num_patches: int,
     augment: bool,
@@ -63,7 +63,7 @@ def process_single_img(
 
                 img.save(hr_img_path, compress_level=1)
 
-                if resampling_method == "matlab_bicubic":
+                if interpolation == "matlab_bicubic":
                     lr_img_np = imresize(np.array(img), scale=1 / scaling_factor)
                     lr_img = Image.fromarray(lr_img_np)
                 else:
@@ -71,7 +71,7 @@ def process_single_img(
                     new_height = img.size[1] // scaling_factor
                     lr_img = img.resize(
                         size=(new_width, new_height),
-                        resample=getattr(Image.Resampling, resampling_method.upper()),
+                        resample=getattr(Image.Resampling, interpolation.upper()),
                     )
 
                 if blur or noise or jpeg:
@@ -88,7 +88,7 @@ def process_imgs(
     scaling_factor: int,
     recursive: bool = False,
     num_workers: int | None = None,
-    resampling_method: str = "matlab_bicubic",
+    interpolation: str = "matlab_bicubic",
     patch_size: int = 0,
     num_patches: int = 1,
     augment: bool = False,
@@ -125,7 +125,7 @@ def process_imgs(
         hr_dir=hr_dir_output_path,
         lr_dir=lr_dir_output_path,
         scaling_factor=scaling_factor,
-        resampling_method=resampling_method,
+        interpolation=interpolation,
         patch_size=patch_size,
         num_patches=num_patches,
         augment=augment,

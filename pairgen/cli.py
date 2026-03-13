@@ -23,7 +23,7 @@ def main() -> None:
     )
     parser.add_argument(
         "-s",
-        "--scale",
+        "--scaling-factor",
         type=int,
         required=True,
         help="Scaling factor for LR images.",
@@ -35,19 +35,19 @@ def main() -> None:
         help="Scan subdirectories recursively.",
     )
     parser.add_argument(
-        "-t",
-        "--threads",
+        "-w",
+        "--workers",
         type=int,
         default=1,
-        help="Number of threads for processing. Use 1 for strict sequential order (default: 1).",
+        help="Number of worker processes. Use 1 for strict sequential order (default: 1).",
     )
     parser.add_argument(
-        "-rm",
-        "--resampling-method",
+        "-im",
+        "--interpolation",
         type=str,
         choices=["matlab_bicubic", "bilinear", "bicubic", "lanczos", "nearest"],
         default="matlab_bicubic",
-        help="Resampling method (default: matlab_bicubic).",
+        help="Interpolation method (default: matlab_bicubic).",
     )
     parser.add_argument(
         "-p",
@@ -89,16 +89,16 @@ def main() -> None:
     if not args.input_path.exists():
         parser.error(f"Input path does not exist: '{args.input_path}'.")
 
-    if args.threads < 1:
-        parser.error(f"Thread count must be >= 1. Got: {args.threads}.")
+    if args.workers< 1:
+        parser.error(f"Worker count must be >= 1. Got: {args.workers}.")
 
     process_imgs(
         input_data_path=args.input_path,
         output_data_path=args.output_dir,
-        scaling_factor=args.scale,
+        scaling_factor=args.scaling_factor,
         recursive=args.recursive,
-        num_workers=args.threads,
-        resampling_method=args.resampling_method,
+        num_workers=args.workers,
+        interpolation=args.interpolation,
         patch_size=args.patch_size,
         num_patches=args.num_patches,
         augment=args.augment,

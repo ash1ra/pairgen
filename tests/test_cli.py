@@ -20,12 +20,12 @@ def test_cli_input_path_not_exists(tmp_path: Path, capsys: CaptureFixture[str]) 
     assert "Input path does not exist" in captured.err
 
 
-def test_cli_invalid_threads(tmp_path: Path, capsys: CaptureFixture[str]) -> None:
-    test_args = ["pairgen", "-i", str(tmp_path), "-o", str(tmp_path), "-s", "4", "-t", "0"]
+def test_cli_invalid_workers(tmp_path: Path, capsys: CaptureFixture[str]) -> None:
+    test_args = ["pairgen", "-i", str(tmp_path), "-o", str(tmp_path), "-s", "4", "-w", "0"]
 
     with patch("sys.argv", test_args):
         with pytest.raises(SystemExit):
             main()
 
     captured = capsys.readouterr()
-    assert "Thread count must be >= 1" in captured.err
+    assert "Worker count must be >= 1" in captured.err
