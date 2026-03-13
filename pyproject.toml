@@ -4,10 +4,10 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pairgen"
-version = "1.0.0"
+version = "1.0.1"
 requires-python = ">=3.11"
 authors = [{ name = "ash1ra" }]
-description = "Fast and reliable HR-LR image pair generator"
+description = "Fast and reliable HR-LR image pair generator for ML/DL datasets"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
@@ -35,10 +35,6 @@ dev = [
 	"pytest>=9.0.2",
 	"ruff>=0.15.4",
 ]
-
-[project.urls]
-Repository = "https://github.com/ash1ra/pairgen"
-Issues = "https://github.com/ash1ra/pairgen/issues"
 
 [project.scripts]
 pairgen = "pairgen.cli:main"
