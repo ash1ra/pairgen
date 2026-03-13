@@ -89,7 +89,7 @@ def main() -> None:
     if not args.input_path.exists():
         parser.error(f"Input path does not exist: '{args.input_path}'.")
 
-    if args.workers< 1:
+    if args.workers < 1:
         parser.error(f"Worker count must be >= 1. Got: {args.workers}.")
 
     process_imgs(
